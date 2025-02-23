@@ -6,6 +6,17 @@ from sklearn.preprocessing import MultiLabelBinarizer, LabelEncoder
 import pickle
 import streamlit as st  
 import os
+from flask import Flask, request, jsonify
+from flask_cors import CORS
+app = Flask(__name__)
+CORS(app)  # Enable CORS for all domains
+
+@app.route('/predict', methods=['GET'])
+def predict():
+    symptom = request.args.get('symptom')
+    if symptom:
+        return jsonify({"prediction": f"Diagnosis for {symptom}"})
+    return jsonify({"error": "No symptom provided"}), 400
 
 # Load dataset
 file_path = 'symbipredict_2022.csv'
@@ -83,3 +94,6 @@ if st.button("Predict Disease"):
                 st.write(f"{i}. {disease} ({confidence:.2f}% confidence)")
 
 print("Model trained and saved successfully!")
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=5000)
