@@ -28,15 +28,17 @@
                 document.getElementById("output").innerText = "Please select a symptom.";
                 return;
             }
-            fetch("https://hackday-ye6dsqyrfgdoh4k49sgrqt.streamlit.app/predict?symptom=" + symptom)
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById("output").innerText = "Prediction: " + data.prediction;
-                })
-                .catch(error => {
-                    console.error("Error:", error);
-                    document.getElementById("output").innerText = "Error getting prediction.";
-                });
+
+            fetch("https://hackday-ye6dsqyrfgdoh4k49sgrqt.streamlit.app/predict?symptom=" + symptom, {
+                mode: "no-cors"
+            })
+            .then(response => {
+                document.getElementById("output").innerText = "Prediction request sent (CORS disabled).";
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                document.getElementById("output").innerText = "Error getting prediction.";
+            });
         }
     </script>
 </body>
