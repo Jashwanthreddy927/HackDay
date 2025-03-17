@@ -1,7 +1,8 @@
 streamlit
-joblib
-scikit-learn
-numpy
 pandas
-flask
-flask_cors
+numpy
+scikit-learn
+pickle5
+fuzzywuzzy
+python-Levenshtein
+spacy
