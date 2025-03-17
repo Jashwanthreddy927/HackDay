@@ -2,7 +2,6 @@ streamlit
 pandas
 numpy
 scikit-learn
-pickle5
 fuzzywuzzy
 python-Levenshtein
 spacy
