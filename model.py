@@ -3,6 +3,7 @@ import numpy as np
 import pickle
 import streamlit as st
 import spacy
+from spacy.cli import download
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import MultiLabelBinarizer, LabelEncoder
 from sklearn.model_selection import train_test_split
@@ -57,8 +58,12 @@ with open('mlb.pkl', 'wb') as f:
     pickle.dump(mlb, f)
 
 # Load spaCy NLP model
-nlp = spacy.load('en_core_web_sm')
-
+try:
+    nlp = spacy.load('en_core_web_sm')
+except OSError:
+    # If the model is not found, download it
+    download('en_core_web_sm')
+    nlp = spacy.load('en_core_web_sm')
 # Streamlit UI with custom styling
 st.markdown(
     """
