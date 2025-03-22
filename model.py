@@ -58,12 +58,9 @@ with open('mlb.pkl', 'wb') as f:
     pickle.dump(mlb, f)
 
 # Load spaCy NLP model
-try:
+
     nlp = spacy.load('en_core_web_sm')
-except OSError:
-    # If the model is not found, download it
-    download('en_core_web_sm')
-    nlp = spacy.load('en_core_web_sm')
+
 # Streamlit UI with custom styling
 st.markdown(
     """
